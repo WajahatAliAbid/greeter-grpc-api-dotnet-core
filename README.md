@@ -9,7 +9,7 @@ It's a basic Hello World grpc Api where we have a [server](./src/HelloGrpc.Serve
 ```bash
     dotnet run -p ./src/HelloGrpc.Server/HelloGrpc.Server.csproj
 ```
-Open another instance of terminal and run the following command
+When server is up and running, we can run the client application to send request to server and get response. Open another instance of terminal and run the following command
 ```
     dotnet run -p ./src/HelloGrpc.Client/HelloGrpc.Client.csproj
 ```
