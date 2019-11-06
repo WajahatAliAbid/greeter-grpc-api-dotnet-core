@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Grpc.Net.Client;
-using HelloGrpc.Server;
+using Grpc.Core;
+using HelloGrpc.Shared;
 
 namespace HelloGrpc.Client
 {
@@ -10,8 +10,7 @@ namespace HelloGrpc.Client
         static async Task Main(string[] args)
         {
             Console.WriteLine("Calling SayHello Endpoint with name: 'World'");
-
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var channel = new Channel("https://localhost:5001",ChannelCredentials.Insecure);
             var client = new Greeter.GreeterClient(channel);
             var helloReply = await client.SayHelloAsync(new HelloRequest { Name = "World" });
             Console.WriteLine($"Response from server, '{helloReply.Message}'");
