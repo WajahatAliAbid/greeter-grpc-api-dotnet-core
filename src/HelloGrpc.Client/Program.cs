@@ -14,6 +14,13 @@ namespace HelloGrpc.Client
             var client = new Greeter.GreeterClient(channel);
             var helloReply = await client.SayHelloAsync(new HelloRequest { Name = "World" });
             Console.WriteLine($"Response from server, '{helloReply.Message}'");
+
+            var call = client.SayHelloStream(new HelloRequest {Name="World"});
+            await foreach (var item in call.ResponseStream.ReadAllAsync())
+            {
+                Console.WriteLine($"Response from server, '{item.Message}'");
+            }
+            await channel.ShutdownAsync();
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
